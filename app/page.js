@@ -43,11 +43,10 @@ export default function Page() {
               alt="Bee Logo"
               className="m-5"
             />
-            <p className="text-3xl font-bold  text-black">Bookish</p>
+            <p className="text-3xl font-bold  text-black font-sans">Bookish</p>
 
-            <p className="text-3xl text-black">Buzz</p>
+            <p className="text-3xl text-black font-sans">Buzz</p>
           </div>
-          <ul className="flex space-x-4"></ul>
         </div>
       </header>
 

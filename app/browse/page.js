@@ -14,6 +14,7 @@ export default function Page() {
   const [userInput, setUserInput] = useState("");
   const { firebaseSignOut } = useUserAuth();
   const router = useRouter();
+
   useEffect(() => {
     setLoading(true);
     async function fetchBooks() {
@@ -34,7 +35,9 @@ export default function Page() {
     }
     fetchBooks();
   }, []);
+
   if (error) return <p>Error: {error.message}</p>;
+
   if (loading)
     return (
       <div>
@@ -68,19 +71,22 @@ export default function Page() {
             </div>
 
             <ul className="flex space-x-4">
-              <li>
-                <Link
-                  href="http://localhost:3000/"
-                  className="hover:underline font-sans text-black"
-                >
-                  Home
-                </Link>
-              </li>
-              <li>
-                <a href="#" className="hover:underline font-sans text-black">
-                  Browse
-                </a>
-              </li>
+              <button
+                onClick={() => {
+                  router.push("/home");
+                }}
+                className="font-sans text-black"
+              >
+                Home
+              </button>
+              <button
+                onClick={() => {
+                  router.push("/browse");
+                }}
+                className="font-sans text-black"
+              >
+                Browse
+              </button>
               <button
                 onClick={() => {
                   signOut();
@@ -108,6 +114,10 @@ export default function Page() {
 
   const signOut = async () => {
     await firebaseSignOut();
+  };
+
+  const navigateToHome = () => {
+    router.push("/home");
   };
 
   const search = async () => {
@@ -162,14 +172,12 @@ export default function Page() {
           </div>
 
           <ul className="flex space-x-4">
-            <li>
-              <Link
-                href="http://localhost:3000/"
-                className="hover:underline font-sans text-black"
-              >
-                Home
-              </Link>
-            </li>
+            <button
+              onClick={navigateToHome}
+              className="text-black hover:underline"
+            >
+              Home
+            </button>
             <li>
               <a href="#" className="hover:underline font-sans text-black">
                 Browse
@@ -180,7 +188,7 @@ export default function Page() {
                 signOut();
                 router.push("/");
               }}
-              className="font-sans text-black"
+              className="font-sans text-black hover:underline"
             >
               Sign Out
             </button>
