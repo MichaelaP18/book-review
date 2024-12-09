@@ -13,7 +13,7 @@ export default function Page() {
   console.log(useUserAuth());
   const router = useRouter();
   const { user, gitHubSignIn, firebaseSignOut, googleSignIn } = useUserAuth();
-
+  const backgroundImageUrl = "/Background.png";
   const signIn = async () => {
     await gitHubSignIn();
   };
@@ -51,7 +51,10 @@ export default function Page() {
         </div>
       </header>
 
-      <main className="flex-grow p-6 bg-[#fafbfd]">
+      <main
+        className="h-screen bg-cover bg-center bg-[#fafbfd]"
+        style={{ backgroundImage: `url(${backgroundImageUrl})` }}
+      >
         {user ? (
           <div className="flex flex-col items-center justify-center">
             <div className="flex flex-col items-center border-4 border-yellow-200/80 bg-purple-500/75 rounded-xl drop-shadow-xl absolute top-1/3">
