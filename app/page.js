@@ -1,40 +1,57 @@
 "use client";
 import { useUserAuth } from "./_utils/auth-context";
 import Link from "next/link";
-
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { FaGithub, FaGoogle } from "react-icons/fa";
+import Image from "next/image";
+import ElevatedButton from "./components/ElevatedButton";
 //Home Page
 
 //testing nathan
 export default function Page() {
   console.log(useUserAuth());
-
-  const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
+  const router = useRouter();
+  const { user, gitHubSignIn, firebaseSignOut, googleSignIn } = useUserAuth();
 
   const signIn = async () => {
     await gitHubSignIn();
   };
 
+  const signInGoogle = async () => {
+    await googleSignIn();
+  };
   const signOut = async () => {
     await firebaseSignOut();
   };
 
+  useEffect(() => {
+    if (user) {
+      router.push("/browse");
+    }
+  }, [user, router]);
+
   return (
     <div className="flex flex-col h-screen">
-      <header className="bg-purple-500 text-white p-8 shadow-md">
+      <header className="bg-[#e4c7ff] text-white p-8 shadow-md">
         <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-3xl font-bold">Bookish Buzz</h1>
+          <div className="flex items-center justify-center">
+            <Image
+              src="/BeeLogo.png"
+              width={40}
+              height={40}
+              alt="Bee Logo"
+              className="m-5"
+            />
+            <p className="text-3xl font-bold  text-black">Bookish</p>
 
-          <ul className="flex space-x-4">
-            <li>
-              <Link href="http://localhost:3000/" className="hover:underline">
-                Home
-              </Link>
-            </li>
-          </ul>
+            <p className="text-3xl text-black">Buzz</p>
+          </div>
+          <ul className="flex space-x-4"></ul>
         </div>
       </header>
 
-      <main className="flex-grow p-6">
+      <main className="flex-grow p-6 bg-[#fafbfd]">
         {user ? (
           <div className="flex flex-col items-center justify-center">
             <div className="flex flex-col items-center border-4 border-yellow-200/80 bg-purple-500/75 rounded-xl drop-shadow-xl absolute top-1/3">
@@ -61,26 +78,47 @@ export default function Page() {
             </div>
           </div>
         ) : (
-          <div className="flex w-1/2 h-2/3  justify-center  items-center absolute left-1/4 top-1/5">
-            <div
-              className="flex flex-col
-            justify-center items-center border-4 border-yellow-200/80 bg-purple-500/75 rounded-xl drop-shadow-xl w-2/3 h-1/3"
-            >
-              <h1 className="font-cursive text-3xl text-center p-4  text-slate-100">
-                Sorry, you need to sign in first!
+          <div className="flex flex-col items-center justify-center h-screen  ">
+            <div className="flex flex-col items-center justify-center min-h-10 p-10 bg-white rounded-3xl shadow-xl ">
+              <Image
+                src="/BeeLogo.png"
+                width={70}
+                height={70}
+                alt="Bee Logo"
+                className="-m-2"
+              />
+              <h1 className="font-po text-4xl text-center m-10 p-2 font-sans font-bold text-black ">
+                Welcome to <br />
+                Bookish Buzz!
               </h1>
-              <button
-                className="text-center hover:underline mt-4 border-white border-2 hover:border-yellow-200 bg-purple-700/30 rounded-md p-2 m-5 text-slate-100"
-                onClick={signIn}
-              >
-                Sign In
-              </button>
+              <p className=" text-black font-sans">
+                Sign in to access your Bookish Buzz account.
+              </p>
+              <p className="font-po text-base text-center m-4  font-sans text-black">
+                - Sign In to continue -
+              </p>
+
+              <div className="flex space-x-4">
+                <ElevatedButton
+                  text="GitHub"
+                  onClick={signIn}
+                  Icon={FaGithub}
+                />
+                <ElevatedButton
+                  text="Google"
+                  onClick={signInGoogle}
+                  Icon={FaGoogle}
+                />
+              </div>
             </div>
           </div>
         )}
       </main>
 
-      <footer className="bg-purple-500 text-white p-12 shadow-md"></footer>
+      <footer className="bg-[#e4c7ff]  p-12 shadow-md text-black">
+        Web Development 2 SAIT | Garth Carey . Michaela Paige . Zena Kebede .
+        Nathan Romasanta
+      </footer>
     </div>
   );
 }
