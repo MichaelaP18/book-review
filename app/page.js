@@ -118,9 +118,11 @@ export default function Page() {
         )}
       </main>
 
-      <footer className="bg-[#e4c7ff]  p-12 shadow-md text-black">
-        Web Development 2 SAIT | Garth Carey . Michaela Paige . Zena Kebede .
-        Nathan Romasanta
+      <footer className="bg-[#e4c7ff]  p-5 shadow-md text-black">
+        <p className="text-center">
+          Web Development 2 SAIT | Garth Carey . Michaela Paige . Zena Kebede .
+          Nathan Romasanta
+        </p>
       </footer>
     </div>
   );
