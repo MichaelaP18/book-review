@@ -102,11 +102,6 @@ export default function Page() {
 
               <div className="flex space-x-4">
                 <ElevatedButton
-                  text="GitHub"
-                  onClick={signIn}
-                  Icon={FaGithub}
-                />
-                <ElevatedButton
                   text="Google"
                   onClick={signInGoogle}
                   Icon={FaGoogle}
