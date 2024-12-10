@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useUserAuth } from "../_utils/auth-context";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import ElevatedButton from "../components/ElevatedButton";
